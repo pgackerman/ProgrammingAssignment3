@@ -29,7 +29,7 @@ best <- function(state, outcome)
 
 ##  Load the file into a data frame.
 
-    outcome_df <- read.csv("outcome-of-care-measures.csv")
+    outcome_df <- read.csv("outcome-of-care-measures.csv", stringsAsFactors = FALSE)
 
 
 ##  Test to see if the state/commonwealth is valid
@@ -46,11 +46,9 @@ best <- function(state, outcome)
     outcome_df <- outcome_df[outcome_df$State == state & outcome_df[, colname] != "Not Available", ]
 
 
-##  Convert the name from factor to character and convert the data column the
-##  data to numeric.
+##  Convert the data column to numeric
 
-    outcome_df$Hospital.Name <- as.character(outcome_df$Hospital.Name)
-    outcome_df[, colname] <- as.numeric(as.character(outcome_df[, colname]))
+    outcome_df[, colname] <- as.numeric(outcome_df[, colname])
 
 
 ##  Sort the data frame by the data column, then by the hospital name
