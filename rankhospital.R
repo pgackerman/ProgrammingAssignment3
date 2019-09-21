@@ -73,5 +73,5 @@ rankhospital <- function(state, outcome, num = "best")
         return(NA)
     }
 
-    return(outcome_df$Hospital.Name[num])
+    outcome_df$Hospital.Name[num]
 }
