@@ -1,9 +1,9 @@
-##  This function returns the best hospital in the state/commonwealth for one of
-##  three outcomes: heart attack, heart failure, or pneumonia.  The
-##  state/commonwealth must be one of the states/commonwealths found in the
-##  State column of the data file.
+##  This function returns the name of the hospital with a specified ranking,
+##  state/commonwealth, and one of the three outcomes: heart attack, heart
+##  failure, or pneumonia.  The state/commonwealth must be one of the
+##  states/commonwealths found in the State column of the data file.
 
-best <- function(state, outcome)
+rankhospital <- function(state, outcome, num = "best")
 {
 
 ##  Test to see if the outcome entered is valid.  If it is valid, colname will
@@ -58,8 +58,22 @@ best <- function(state, outcome)
     outcome_df <- outcome_df[order(outcome_df[, colname], outcome_df$Hospital.Name), ]
 
 
-##  Return the hospital name in the first row, which is the best hospital in the
-##  state/commonwealth for the desired outcome.
+##  Return the proper value.
 
-    outcome_df$Hospital.Name[1]
+    if (num == "best")
+    {
+        return(outcome_df$Hospital.Name[1])
+    }
+
+    if (num == "worst")
+    {
+        return(outcome_df$Hospital.Name[nrow(outcome_df)])
+    }
+
+    if (num > nrow(outcome_df))
+    {
+        return(NA)
+    }
+
+    outcome_df$Hospital.Name[num]
 }
